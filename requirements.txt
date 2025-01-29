@@ -1,0 +1,16 @@
+# phidata
+# python-dotenv
+# yfinance
+# packaging
+# duckduckgo-search
+# fastapi
+# uvicorn
+# groq
+# google-search-results
+# newspaper4k
+# lxml_html_clean
+# youtube_transcript_api
+flask
+fpdf
+twilio
+flask_cors
