@@ -88,14 +88,12 @@ nutrition_db = {
 }
 
 
-# AI agent to fetch nutritional info
 def ai_fetch_nutrition(dish_name):
     if dish_name in nutrition_db:
         return nutrition_db[dish_name]
-    # Simulate AI agent fetching data
+    # Here AI code will come and fetch the nutritional infos
     return {"calories": 100, "carbs": 10, "protein": 5, "fat": 2, "fiber": 1}
 
-# Route to get nutrition info
 @app.route("/api/nutrition", methods=["POST"])
 def get_nutrition():
     data = request.json
@@ -105,12 +103,9 @@ def get_nutrition():
     nutrition = ai_fetch_nutrition(dish_name)
     if not nutrition:
         return jsonify({"error": "Dish not found"}), 404
-
-    # Scale nutrition by quantity
     scaled_nutrition = {k: v * (quantity / 100) for k, v in nutrition.items()}
     return jsonify(scaled_nutrition)
 
-# Route to generate PDF and send via WhatsApp
 @app.route("/api/generate-pdf", methods=["POST"])
 def generate_pdf():
     data = request.json
@@ -119,7 +114,6 @@ def generate_pdf():
     tracked_calories = data.get("trackedCalories")
     whatsapp_number = data.get("whatsappNumber")
 
-    # Generate PDF
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
@@ -137,7 +131,7 @@ def generate_pdf():
     pdf_file = "diet_chart.pdf"
     pdf.output(pdf_file)
 
-    # Send via WhatsApp (using Twilio)
+    # is not working (Work in progress)
     client = Client("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN")
     message = client.messages.create(
         from_="whatsapp:+918910818207",
